@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { Rules } from "../Components/Rules";
 
 export function Home() {
   const [catInfo, setCatInfo] = useState([]);
+  const [isRuleActive, setIsRuleActive] = useState(false);
 
   useEffect(() => {
     async function getCatsInfo() {
@@ -34,7 +36,12 @@ export function Home() {
         <h1 className="text-2xl md:text-5xl">
           <strong>Cat Memory Game</strong>
         </h1>
-        <button className="center absolute right-1.5">Rules</button>
+        <button
+          className="center absolute right-1.5"
+          onClick={() => setIsRuleActive(true)}
+        >
+          Rules
+        </button>
       </div>
       <div className="grid grid-cols-3 gap-3 md:grid-cols-5">
         {catInfo.map((item) => {
@@ -58,6 +65,9 @@ export function Home() {
           );
         })}
       </div>
+      {/* Absolute component which will be rendered on the center screen on
+      clicking the rules button */}
+      {isRuleActive && <Rules setIsRuleActive={setIsRuleActive} />}
     </>
   );
 }
